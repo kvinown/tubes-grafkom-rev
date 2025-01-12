@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Besar Grafika Komputer three js</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <canvas class="webgl"></canvas>
+    <div class="loading-bar"></div>
+
+    <section class="one">
+        <div class="container">
+            <div class="hero">
+                <h2>Pinklogy Donuts</h2>
+                <h3>Have u try Pinklogy donuts??</h3>
+                <p>Have you tried Pinklogy donuts? These delightful treats feature a fluffy, golden-brown base topped
+                    with a luscious pink glaze that’s both sweet and creamy. Finished with a colorful sprinkle topping,
+                    each bite offers a perfect balance of texture and flavor. Whether you’re looking for a midday
+                    pick-me-up or a sweet indulgence, Pinklogy donuts are the ultimate choice for satisfying your
+                    cravings.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="two">
+        <div class="container">
+            <div class="hero">
+                <h2>How we do</h2>
+                <h3>Experiment width tasty <br>donuts recipe everytime</h3>
+                <p>We experiment with tasty donut recipes every time to bring you the most delightful treats! Each
+                    recipe is carefully crafted to ensure the perfect balance of flavor and texture. From the soft,
+                    fluffy dough to the vibrant glazes and toppings, every donut is a masterpiece. Our dedication to
+                    quality and creativity ensures that every bite is an unforgettable experience.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="three">
+        <div class="pagination-container">
+            <div class="pagination">
+                <span class="plan" data-gltf="polos.gltf"></span>Base
+                <span class="strawberry" data-gltf="strawberry.gltf"></span>strawberry
+                <span class="coklat" data-gltf="coklat.gltf"></span>coklat
+                <span class="milk current" data-gltf="milk.gltf"></span>milk current
+                <span class="tiramisu" data-gltf="tiramisu.gltf"></span>tiramisu
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('.pagination span').forEach(span => {
+            span.addEventListener('click', function () {
+                document.querySelectorAll('.pagination span').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.min.js"></script>
+    <!-- <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script> -->
+    <script src="https://unpkg.com/three@0.146.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
