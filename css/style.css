@@ -14,8 +14,8 @@ html {
 
 body {
    position: relative;
-   height: 400%;
-   overflow: hidden;
+   min-height: 100vh;
+   overflow: auto;
    font-family: 'Josefin Sans', cursive;
    animation: backgroundChange 3s infinite;
    animation-timing-function: linear;
@@ -213,24 +213,24 @@ p {
    left: -2px;
    right: -2px;
    bottom: -2px;
-   border: 2px solid #000; /* Outer border color */
+   border: 2px solid #000;
    border-radius: 50%;
 }
 
 .strawberry {
-   --color: #ff4b5c; /* Strawberry color */
+   --color: #ff4b5c;
 }
 
 .coklat {
-   --color: #8b4513; /* Chocolate color */
+   --color: #8b4513;
 }
 
 .milk {
-   --color: #fffacd; /* Milk color */
+   --color: #fffacd;
 }
 
 .tiramisu {
-   --color: #d2b48c; /* Tiramisu color */
+   --color: #d2b48c;
 }
 
 .current {
