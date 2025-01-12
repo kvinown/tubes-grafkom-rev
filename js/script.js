@@ -3,7 +3,7 @@ const donutColors = [0xaec6cf, 0xa2262e, 0x2b1700, 0xffddc1, 0xd2691e];
 class DonutRain {
    constructor() {
       this.donuts = [];
-      this.numDonuts = 30;
+      this.numDonuts = 20;
       this.donutColorIndex = 0;
       this.textureLoader = new THREE.TextureLoader();
       this.donutTexture = this.textureLoader.load(
@@ -26,9 +26,9 @@ class DonutRain {
          const donut = new THREE.Mesh(donutGeometry, donutMaterial);
 
          donut.position.set(
-            Math.random() * 40 - 5, // x
-            Math.random() * 10 + 10, // y
-            Math.random() * 5 - 10 // z
+            Math.random() * 40 - 5, 
+            Math.random() * 10 + 10, 
+            Math.random() * 5 - 10 
          );
          donut.rotation.set(Math.random(), Math.random(), Math.random());
 
@@ -40,9 +40,9 @@ class DonutRain {
    animateDonuts() {
       const animate = () => {
          for (let donut of this.donuts) {
-            donut.position.y -= 0.02;
-            donut.rotation.x += 0.005;
-            donut.rotation.y += 0.005;
+            donut.position.y -= 0.05;
+            donut.rotation.x += 0.01;
+            donut.rotation.y += 0.01;
 
             if (donut.position.y < -5) {
                donut.position.y = Math.random() * 10 + 10;
@@ -69,7 +69,7 @@ class DonutRain {
 /**
  * Base
  */
-const canvas = document.querySelector('canvas.webgl');
+const canvas = document.querySelector('.webgl');
 const scene = new THREE.Scene();
 
 /**
@@ -84,12 +84,12 @@ const loadModel = () => {
 
    const geometry = new THREE.TorusGeometry(0.6, 0.3, 128, 128);
    const material = new THREE.MeshPhongMaterial({
-      color: 0x93471b,
+      color: 0x8B4513,
       shininess: 100,
    });
 
    donut = new THREE.Mesh(geometry, material);
-   donut.position.set(1.5, 20, 0); // Pastikan posisi tidak bertabrakan
+   donut.position.set(1.5, 20, 0); 
    donut.rotation.x = Math.PI * -1.2;
    donut.rotation.z = Math.PI * -0.15;
    scene.add(donut);
@@ -140,71 +140,47 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 /**
  * Scroll Event with GSAP ScrollTrigger
  */
-gsap.registerPlugin(ScrollTrigger);
-
-let currentSection = 0;
 const transformDonut = [
    { rotationZ: 0.45, positionX: 1.5 },
    { rotationZ: -0.45, positionX: -1.5 },
    { rotationZ: 0.0314, positionX: 0 },
 ];
 
-// Create scroll triggers for each section
-ScrollTrigger.create({
-   trigger: '.one',
-   start: 'top top',
-   end: 'bottom top',
-   onEnter: () => {
-      currentSection = 0;
-      gsap.to(donut.rotation, {
-         duration: 1.5,
-         ease: 'power2.inOut',
-         z: transformDonut[0].rotationZ,
-      });
-      gsap.to(donut.position, {
-         duration: 1.5,
-         ease: 'power2.inOut',
-         x: transformDonut[0].positionX,
-      });
-   },
+gsap.registerPlugin(ScrollTrigger);
+
+const updateDonutTransform = (index) => {
+   if (!donut) return;
+
+   gsap.to(donut.rotation, {
+       z: transformDonut[index].rotationZ,
+       duration: 1.5,
+       ease: 'power2.inOut',
+   });
+   gsap.to(donut.position, {
+       x: transformDonut[index].positionX,
+       duration: 1.5,
+       ease: 'power2.inOut',
+   });
+};
+
+document.querySelectorAll('.section').forEach((section, index) => {
+   ScrollTrigger.create({
+       trigger: section,
+       start: 'top center',
+       end: 'bottom center',
+       onEnter: () => updateDonutTransform(index),
+       onEnterBack: () => updateDonutTransform(index),
+   });
 });
 
-ScrollTrigger.create({
-   trigger: '.two',
-   start: 'top top',
-   end: 'bottom top',
-   onEnter: () => {
-      currentSection = 1;
-      gsap.to(donut.rotation, {
-         duration: 1.5,
-         ease: 'power2.inOut',
-         z: transformDonut[1].rotationZ,
-      });
-      gsap.to(donut.position, {
-         duration: 1.5,
-         ease: 'power2.inOut',
-         x: transformDonut[1].positionX,
-      });
-   },
-});
+document.querySelectorAll('.pagination span').forEach((span, index) => {
+   span.addEventListener('click', () => {
+       document.querySelectorAll('.pagination span').forEach((s) => s.classList.remove('active'));
+       span.classList.add('active');
 
-ScrollTrigger.create({
-   trigger: '.three',
-   start: 'top top',
-   end: 'bottom top',
-   onEnter: () => {
-      currentSection = 2;
-      gsap.to(donut.rotation, {
-         duration: 1.5,
-         ease: 'power2.inOut',
-         z: transformDonut[2].rotationZ,
-      });
-      gsap.to(donut.position, {
-         duration: 1.5,
-         ease: 'power2.inOut',
-         x: transformDonut[2].positionX,
-      });
-   },
+       donutRain.updateDonutColor(index);
+       if (donut) donut.material.color.set(donutColors[index]);
+   });
 });
 
 /**
