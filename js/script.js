@@ -1,4 +1,4 @@
-const donutColors = [0xaec6cf, 0xa2262e, 0x2b1700, 0xffddc1, 0xd2691e];
+const donutColors = [0x8B4513, 0xff4b5c, 0x4f86f7, 0xfffacd, 0xd2b48c];
 
 class DonutRain {
    constructor() {
@@ -84,8 +84,10 @@ const loadModel = () => {
 
    const geometry = new THREE.TorusGeometry(0.6, 0.3, 128, 128);
    const material = new THREE.MeshPhongMaterial({
-      color: 0x8B4513,
-      shininess: 100,
+      color: 0x8B4513, // Warna coklat donat
+      roughness: 0.8,  // Menambah kekasaran untuk mengurangi efek mengkilap
+      emissive: 0x000000,
+      // normalMap: this.donutTexture,
    });
 
    donut = new THREE.Mesh(geometry, material);
@@ -93,6 +95,8 @@ const loadModel = () => {
    donut.rotation.x = Math.PI * -1.2;
    donut.rotation.z = Math.PI * -0.15;
    scene.add(donut);
+
+   
 };
 
 loadModel();
