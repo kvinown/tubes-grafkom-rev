@@ -208,18 +208,38 @@ document.querySelectorAll(".section").forEach((section, index) => {
 
 document.querySelectorAll(".pagination span").forEach((span, index) => {
 	span.addEventListener("click", () => {
+		// Remove the active class from all pagination spans
 		document.querySelectorAll(".pagination span").forEach((s) => s.classList.remove("active"));
 		span.classList.add("active");
 
+		console.log(index);
+
+		// Update the donut color based on the selected index
 		donutRain.updateDonutColor(index);
-		if (donut) {
-			donut.material.color.set(donutColors[index]);
-			if (!donut.hasToppings) {
-				addToppings(donut);
+
+		// If index is 0, remove the donut, reset toppings, and reload the model
+		if (index === 0) {
+			if (donut) {
+				donut.hasToppings = false; // Set toppings flag to false
+				// Remove all child objects (toppings) from the donut
+				donut.children.forEach((child) => scene.remove(child));
+				// Remove the donut from the scene
+				scene.remove(donut);
+			}
+			// Reload the donut model
+			loadModel();
+		} else {
+			// If donut model exists, update its color and toppings if needed
+			if (donut) {
+				donut.material.color.set(donutColors[index]); // Update color
+				if (!donut.hasToppings) {
+					addToppings(donut); // Add toppings if not already added
+				}
 			}
 		}
 	});
 });
+
 
 /**
  * Animate
