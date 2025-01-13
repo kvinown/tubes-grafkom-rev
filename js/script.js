@@ -230,8 +230,6 @@ document.querySelectorAll(".pagination span").forEach((span, index) => {
 		document.querySelectorAll(".pagination span").forEach((s) => s.classList.remove("active"));
 		span.classList.add("active");
 
-		console.log(index);
-
 		if (index === 0) {
 			if (donut) {
 				donut.hasToppings = false; // Set toppings flag to false
