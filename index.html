@@ -18,13 +18,12 @@
     <section class="one section">
         <div class="container">
             <div class="hero">
-                <h2>Pinklogy Donuts</h2>
-                <h3>Have u try Pinklogy donuts??</h3>
-                <p>Have you tried Pinklogy donuts? These delightful treats feature a fluffy, golden-brown base topped
-                    with a luscious pink glaze that’s both sweet and creamy. Finished with a colorful sprinkle topping,
-                    each bite offers a perfect balance of texture and flavor. Whether you’re looking for a midday
-                    pick-me-up or a sweet indulgence, Pinklogy donuts are the ultimate choice for satisfying your
-                    cravings.</p>
+                <h2>Classic Sugar Donuts</h2>
+                <h3>Have you tried our sugar-coated donuts?</h3>
+                <p>Our sugar donuts are a timeless treat! These classic donuts feature a soft, 
+                    golden-brown base generously coated with a layer of fine sugar, offering a 
+                    delightful crunch in every bite. Perfectly sweet and wonderfully simple, 
+                    they’re an irresistible choice for any occasion.</p>
             </div>
         </div>
     </section>
@@ -45,13 +44,63 @@
     <section class="three section">
         <div class="pagination-container">
             <div class="pagination">
-                <span class="plan" data-gltf="polos.gltf"></span>Base
-                <span class="strawberry" data-gltf="strawberry.gltf"></span>strawberry
-                <span class="blueberry" data-gltf="coklat.gltf"></span>blueberry
-                <span class="milk current" data-gltf="milk.gltf"></span>milk current
-                <span class="tiramisu" data-gltf="tiramisu.gltf"></span>tiramisu
-                <span class="dark-chocolate" data-gltf="chocolate.gltf"></span>Dark Chocolate
-                <span class="chocolate" data-gltf="chocolate.gltf"></span>Chocolate
+                <span class="plan" 
+                    data-gltf="polos.gltf" 
+                    data-title="Classic Sugar Donuts" 
+                    data-subtitle="Have you tried our sugar-coated donuts?" 
+                    data-desc="Our sugar donuts are a timeless treat! These classic donuts feature a soft, 
+                    golden-brown base generously coated with a layer of fine sugar, offering a 
+                    delightful crunch in every bite. Perfectly sweet and wonderfully simple, 
+                    they’re an irresistible choice for any occasion."></span>Base
+                <span class="strawberry" 
+                    data-gltf="strawberry.gltf" 
+                    data-title="Pinklogy Donuts" 
+                    data-subtitle="Have u try Pinklogy donuts??" 
+                    data-desc="Have you tried Pinklogy donuts? These delightful treats feature a fluffy, golden-brown base topped
+                    with a luscious pink glaze that’s both sweet and creamy. Finished with a colorful sprinkle topping,
+                    each bite offers a perfect balance of texture and flavor. Whether you’re looking for a midday
+                    pick-me-up or a sweet indulgence, Pinklogy donuts are the ultimate choice for satisfying your
+                    cravings."></span>strawberry
+                <span class="blueberry"
+                    data-gltf="coklat.gltf"
+                    data-title="Blueberry Bliss Bomb" 
+                    data-subtitle="Ready to burst into berry heaven?" 
+                    data-desc="Experience the explosive flavor of Blueberry Bliss Bomb! These donuts are a fruity dream, 
+                    coated in a vibrant blueberry glaze that’s sweet, tangy, and irresistibly fresh. Each bite is packed 
+                    with the juicy essence of ripe blueberries, delivering a burst of flavor that will transport your 
+                    taste buds to a berry-filled paradise. Perfect for those who love a fruity twist!"></span>blueberry
+                <span class="milk current" 
+                    data-gltf="milk.gltf" 
+                    data-title="Moo-tastic Milky Whirls" 
+                    data-subtitle="Craving the creamiest donuts ever?" 
+                    data-desc="Dive into the world of Moo-tastic Milky Whirls! These donuts are a dreamy delight, 
+                    topped with a smooth, velvety milk glaze that melts in your mouth. Each bite is an ode to creamy 
+                    perfection, giving you the ultimate taste of milky magic. It’s a treat so irresistibly soft, you’ll 
+                    be coming back for seconds!"></span>milk current
+                <span class="tiramisu" 
+                    data-gltf="tiramisu.gltf" 
+                    data-title="Tira-Mystic Delight" 
+                    data-subtitle="Ready to indulge in coffee-infused bliss?" 
+                    data-desc="Step into the world of Tira-Mystic Delight! These donuts are a luxurious fusion of soft dough, 
+                    rich espresso glaze, and a hint of mascarpone-inspired sweetness. Each bite captures the essence of classic 
+                    tiramisu, offering layers of bold coffee flavor and creamy decadence. Perfect for coffee lovers and dessert 
+                    enthusiasts alike!"></span>tiramisu
+                <span class="dark-chocolate"
+                    data-gltf="chocolate.gltf"
+                    data-title="Midnight Choco Craze" 
+                    data-subtitle="Dare to dive into the darkness?" 
+                    data-desc="Embrace the bold allure of Midnight Choco Craze! These donuts are a rich, indulgent escape, featuring a deep, 
+                    dark chocolate glaze that’s bittersweet perfection. Topped with a sprinkle of dark cocoa dust or chocolate shards, 
+                    every bite is an adventure into the intense, unapologetic flavor of pure chocolate decadence. Not for the faint of 
+                    heart—this is chocolate in its most daring form!"></span>Dark Chocolate
+                <span class="chocolate"
+                    data-gltf="chocolate.gltf"
+                    data-title="Choco-Loco Bliss" 
+                    data-subtitle="Ever gone loco for chocolate donuts?" 
+                    data-desc="Indulge in the madness of Choco-Loco Bliss! These donuts are a chocolate lover's dream, 
+                    featuring a rich, velvety chocolate glaze and a sprinkle of cocoa magic on top. Every bite takes you 
+                    on a wild ride of deep, decadent chocolatey goodness that will leave you craving more. Perfect for 
+                    when you want to embrace your inner chocoholic!"></span>Chocolate
             </div>
         </div>
     </section>
@@ -60,10 +109,19 @@
         document.querySelectorAll('.pagination span').forEach(span => {
             span.addEventListener('click', function () {
                 document.querySelectorAll('.pagination span').forEach(s => s.classList.remove('active'));
+                
                 this.classList.add('active');
+                
+                const newTitle = this.getAttribute('data-title');
+                const newSubtitle = this.getAttribute('data-subtitle');
+                const newDesc = this.getAttribute('data-desc');
+                
+                document.querySelector('.one h2').textContent = newTitle;
+                document.querySelector('.one h3').textContent = newSubtitle;
+                document.querySelector('.one p').textContent = newDesc;
             });
         });
-    </script>
+    </script>    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.min.js"></script>
     <script src="./js/script.js"></script>
