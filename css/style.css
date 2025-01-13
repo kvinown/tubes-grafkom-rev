@@ -19,6 +19,7 @@ body {
    font-family: 'Josefin Sans', cursive;
    animation: backgroundChange 3s infinite;
    animation-timing-function: linear;
+   color: white;
 }
 
 body.loaded {
@@ -231,6 +232,10 @@ p {
 
 .tiramisu {
    --color: #d2b48c;
+}
+
+.chocolate {
+   --color: #603813;
 }
 
 .current {
