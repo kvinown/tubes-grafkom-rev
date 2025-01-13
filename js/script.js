@@ -225,30 +225,43 @@ document.querySelectorAll('.section').forEach((section, index) => {
    });
 });
 
-document.querySelectorAll('.pagination span').forEach((span, index) => {
-   span.addEventListener('click', () => {
-      document
-         .querySelectorAll('.pagination span')
-         .forEach(s => s.classList.remove('active'));
-      span.classList.add('active');
-      donutRain.updateDonutColor(index);
-      if (donut) {
-         donut.hasToppings = false;
-         donut.children.forEach(child => scene.remove(child));
-         scene.remove(donut);
-      }
-      const isChocolate = index === 5 || index === 6;
-      loadModel();
-      if (donut) {
-         donut.material.color.set(donutColors[index]);
-         if (!donut.hasToppings) {
-            addToppings(donut, isChocolate);
-         }
-         donut.position.set(0, 0, 0);
-         camera.lookAt(donut.position);
-      }
-   });
+document.querySelectorAll(".pagination span").forEach((span, index) => {
+	span.addEventListener("click", () => {
+		document.querySelectorAll(".pagination span").forEach((s) => s.classList.remove("active"));
+		span.classList.add("active");
+
+		console.log(index);
+
+		if (index === 0) {
+			if (donut) {
+				donut.hasToppings = false; // Set toppings flag to false
+				// Remove all child objects (toppings) from the donut
+				donut.children.forEach((child) => scene.remove(child));
+				// Remove the donut from the scene
+				scene.remove(donut);
+			}
+			// Reload the donut model
+			loadModel();
+		} else {
+			// If donut model exists, update its color and toppings if needed
+			if (donut) {
+				donut.material.color.set(donutColors[index]); // Update color
+				if (!donut.hasToppings) {
+					// Determine if chocolate toppings are needed
+					const isChocolate = index === 5 || index === 6;
+					addToppings(donut, isChocolate); // Add toppings if not already added
+				}
+			}
+		}
+
+		// Reset donut position and ensure camera looks at it
+		if (donut) {
+			donut.position.set(0, 0, 0);
+			camera.lookAt(donut.position);
+		}
+	});
 });
+
 
 /**
  * Animate
